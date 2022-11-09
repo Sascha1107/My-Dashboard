@@ -7,9 +7,9 @@ import streamlit as st
 #from streamlit_chat import message
 import os
 import time
-import locale
+#import locale
 
-locale.setlocale(locale.LC_ALL, 'de_DE.utf-8')
+#locale.setlocale(locale.LC_ALL, 'de_DE.utf-8')
 
 
 
@@ -115,9 +115,9 @@ fig_product_cost = px.bar(
 
 
 total_value = int(df_choice["Auftragswert"].sum())
-total_value_final = locale.format('%d', total_value, 1)
+#total_value_final = locale.format('%d', total_value, 1)
 total_cost = int(df_choice["Kalkulationswert"].sum())
-total_cost_final = locale.format('%d', total_cost, 1)
+#total_cost_final = locale.format('%d', total_cost, 1)
 
 number_of_projects = len(df_choice.index)
 
@@ -128,11 +128,11 @@ col1, col2,col3 = st.columns(3)
 
 with col1:
         st.subheader("Auftragswert in ARGEN")
-        st.subheader(f"{total_value_final} €")
+        st.subheader(f"{total_value} €")
 
 with col2:
         st.subheader("Kalkulationswert in ARGEN")
-        st.subheader(f"{total_cost_final} €")
+        st.subheader(f"{total_cost} €")
 
 with col3:
     st.subheader("Anzahl Projekte in ARGEN")
