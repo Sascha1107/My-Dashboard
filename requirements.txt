@@ -4,3 +4,4 @@ pandas-profiling
 streamlit-pandas-profiling
 openpyxl
 plotly
+xlrd

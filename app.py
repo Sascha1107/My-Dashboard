@@ -7,11 +7,9 @@ import streamlit as st
 #from streamlit_chat import message
 import os
 import time
-#from chatterbot import chatbot
-#from chatterbot.trainers import ListTrainer
+import locale
 
-
-
+locale.setlocale(locale.LC_ALL, 'de_DE.utf-8')
 
 
 
@@ -57,26 +55,7 @@ Projektkategorie = st.sidebar.multiselect("Projektkategorie",
 
 df_choice = df.query("Region == @Region & Projektkategorie== @Projektkategorie")
 
-total_value = int(df_choice["Auftragswert"].sum())
-total_cost = int(df_choice["Kalkulationswert"].sum())
-number_of_projects = len(df_choice.index)
 
-col1, col2,col3 = st.columns(3)
-
-
-
-
-with col1:
-        st.subheader("Auftragswert in ARGEN")
-        st.subheader(f"{total_value} €")
-
-with col2:
-        st.subheader("Kalkulationswert in ARGEN")
-        st.subheader(f"{total_cost} €")
-
-with col3:
-    st.subheader("Anzahl Projekte in ARGEN")
-    st.subheader(f" # {number_of_projects}")
 
 
 st.markdown("---")
@@ -135,7 +114,29 @@ fig_product_cost = px.bar(
     )
 
 
+total_value = int(df_choice["Auftragswert"].sum())
+total_value_final = locale.format('%d', total_value, 1)
+total_cost = int(df_choice["Kalkulationswert"].sum())
+total_cost_final = locale.format('%d', total_cost, 1)
 
+number_of_projects = len(df_choice.index)
+
+col1, col2,col3 = st.columns(3)
+
+
+
+
+with col1:
+        st.subheader("Auftragswert in ARGEN")
+        st.subheader(f"{total_value_final} €")
+
+with col2:
+        st.subheader("Kalkulationswert in ARGEN")
+        st.subheader(f"{total_cost_final} €")
+
+with col3:
+    st.subheader("Anzahl Projekte in ARGEN")
+    st.subheader(f" # {number_of_projects}")
 
 
 my_bar_chart = px.bar(revenue_per_region, y=["Auftragswert"], color_discrete_sequence=["#1CE5C3"],text_auto=True, title ="<b> Kalkulationswert je Produkt </b>", )
@@ -167,19 +168,8 @@ st.markdown("---")
 
 st.header("Haben Sie Fragen zu dem Bericht? Fragen Sie unseren Bot")
 
-message_history= []
 
-message("Hallo - du hast Fragen zum Report? Wie können wir dir weiterhelfen?")
 
-for message_ in message_history:
-    message(message_)   # display all the previous message
-
-placeholder = st.empty()  # placeholder for latest message
-input_ = st.text_input("you:")
-message_history.append(input_)
-
-with placeholder.container():
-    message(message_history[-1]) # display the latest message
 
 
 st.markdown("---")
