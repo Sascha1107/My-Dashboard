@@ -190,7 +190,7 @@ st.markdown("---")
 
 hide_style = """
             <style>
-            #MainMenu {visibility: hidden;}
+             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
             </style>
